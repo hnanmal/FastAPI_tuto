@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from models import TodoModel, Base
-from schemas import TodoCreate, TodoOut, TodoPatch, TodoUpdate
+from models import TodoModel, Base, UserModel
+from schemas import TodoCreate, TodoOut, TodoPatch, TodoUpdate, UserCreate, UserOut
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, joinedload
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -37,9 +37,25 @@ def get_db():
         db.close()
 
 
+@app.post("/users/", response_model=UserOut)
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = UserModel(name=user.name)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
+@app.get("/users/", response_model=List[UserOut])
+def read_users(db: Session = Depends(get_db)):
+    return db.query(UserModel).all()
+
+
 @app.post("/todos/", response_model=TodoOut)
 def create_todo(todo: TodoCreate, db: Session = Depends(get_db)):
-    db_todo = TodoModel(title=todo.title)  # completed는 자동 False
+    db_todo = TodoModel(
+        title=todo.title, user_id=todo.user_id
+    )  # completed는 자동 False
     db.add(db_todo)
     db.commit()
     db.refresh(db_todo)
@@ -48,7 +64,8 @@ def create_todo(todo: TodoCreate, db: Session = Depends(get_db)):
 
 @app.get("/todos/", response_model=List[TodoOut])
 def read_todos(db: Session = Depends(get_db)):
-    todos = db.query(TodoModel).all()
+    # todos = db.query(TodoModel).all()
+    todos = db.query(TodoModel).options(joinedload(TodoModel.owner)).all()
     return todos
 
 
