@@ -5,7 +5,7 @@ Base = declarative_base()
 
 
 class UserModel(Base):
-    __tablename__ = "users"
+    __tablename__ = "users"  # db 에 있는 테이블 명
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -14,7 +14,7 @@ class UserModel(Base):
 
 
 class TodoModel(Base):
-    __tablename__ = "todos"
+    __tablename__ = "todos"  # db 에 있는 테이블 명
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
