@@ -1,7 +1,10 @@
-from pydantic import BaseModel
-from typing import Optional
+from __future__ import annotations
+
+from typing import List  # 필요시
+from pydantic import BaseModel, ConfigDict
 
 
+# -------- User --------
 class UserCreate(BaseModel):
     name: str
 
@@ -10,15 +13,16 @@ class UserOut(BaseModel):
     id: int
     name: str
 
-    class Config:
-        orm_mode = True
+    # Pydantic v2: orm_mode -> from_attributes
+    model_config = ConfigDict(from_attributes=True)
 
 
+# -------- Todo --------
 class TodoCreate(BaseModel):
     """요청용"""
 
     title: str
-    user_id: Optional[int]  # 🔥 user_id 받을 수 있게 함
+    user_id: int | None  # Optional[int] == int | None
 
 
 class TodoOut(BaseModel):
@@ -27,10 +31,10 @@ class TodoOut(BaseModel):
     id: int
     title: str
     completed: bool
-    owner: Optional[UserOut]  # 연결된 User 포함
+    owner: UserOut | None  # 연결된 User 포함
 
-    class Config:
-        orm_mode = True  # SQLAlchemy 모델 -> 자동 변환 가능
+    # Pydantic v2
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TodoUpdate(BaseModel):
@@ -39,6 +43,6 @@ class TodoUpdate(BaseModel):
 
 
 class TodoPatch(BaseModel):
-    title: Optional[str] = None
-    completed: Optional[bool] = None
-    user_id: Optional[int] = None
+    title: str | None = None
+    completed: bool | None = None
+    user_id: int | None = None

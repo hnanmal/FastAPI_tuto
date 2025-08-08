@@ -1,0 +1,22 @@
+📁 FastAPI_tuto/
+    📄 main copy.py
+    📄 main.py
+    📁 alembic/
+        📄 env.py
+        📁 versions/
+            📄 524421783939_add_user_id_column.py
+    📁 core/
+        📄 database.py
+    📁 crud/
+        📄 todo.py
+        📄 user.py
+    📁 dependencies/
+        📄 deps.py
+    📁 models/
+        📄 models.py
+    📁 routers/
+        📄 todo.py
+        📄 user.py
+    📁 schemas/
+        📄 schemas copy.py
+        📄 schemas.py

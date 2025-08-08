@@ -1,0 +1,71 @@
+
+📄 main copy.py
+  - def get_db()
+  - def create_user()
+  - def read_users()
+  - def create_todo()
+  - def read_todos()
+  - def update_todo()
+  - def patch_todo()
+  - def delete_todo()
+
+📄 alembic\env.py
+  - def run_migrations_offline()
+      Run migrations in 'offline' mode.
+      
+      This configures the context with just a URL
+      and not an Engine, though an Engine is acceptable
+      here as well.  By skipping the Engine creation
+      we don't even need a DBAPI to be available.
+      
+      Calls to context.execute() here emit the given string to the
+      script output.
+  - def run_migrations_online()
+      Run migrations in 'online' mode.
+      
+      In this scenario we need to create an Engine
+      and associate a connection with the context.
+
+📄 alembic\versions\524421783939_add_user_id_column.py
+  - def upgrade()
+  - def downgrade()
+
+📄 core\database.py
+  - def init_db()
+
+📄 crud\todo.py
+  - def create_todo()
+  - def get_all_todos()
+  - def get_todo()
+  - def update_todo()
+  - def patch_todo()
+  - def delete_todo()
+
+📄 crud\user.py
+  - def create_user()
+      사용자 생성
+  - def get_user()
+      ID로 단건 조회
+  - def get_user_by_name()
+      이름으로 단건 조회 (중복 체크 등에 활용)
+  - def get_all_users()
+      전체 사용자 목록
+  - def update_user_name()
+      사용자 이름 변경
+  - def delete_user()
+      사용자 삭제. 삭제 성공 시 True, 대상 없으면 False
+
+📄 dependencies\deps.py
+  - def get_db()
+
+📄 routers\todo.py
+  - def create()
+  - def read_all()
+  - def update()
+  - def patch()
+  - def delete()
+
+📄 routers\user.py
+  - def create_user()
+  - def read_users()
+  - def remove_user()

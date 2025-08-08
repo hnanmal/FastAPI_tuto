@@ -1,2 +1,28 @@
-/venv
-/__pycache__
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# 📦 가상환경
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+
+# 🧊 PyInstaller 빌드 산출물
+*.spec
+build/
+dist/
+*.pyz
+*.toc
+*.dll
+*.manifest
+
+# 📦 Inno Setup 출력
+installer/
+Output/
+setup.exe
