@@ -4,8 +4,10 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from dependencies.deps import get_db
-from schemas.schemas import UserCreate, UserOut
-from crud import user as crud_user
+
+# from schemas.schemas import UserCreate, UserOut
+from domain.user.user_schema import UserCreate, UserOut
+from domain.user import user_crud as crud_user
 
 router = APIRouter(prefix="/users", tags=["users"])
 

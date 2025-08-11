@@ -3,8 +3,10 @@ from __future__ import annotations
 from typing import Optional, List
 from sqlalchemy.orm import Session
 
-from models.models import UserModel
-from schemas.schemas import UserCreate
+from domain.user.user_schema import UserCreate
+from models import UserModel  # 또는 from models import UserModel as User
+
+# from schemas.schemas import UserCreate
 
 
 def create_user(db: Session, user: UserCreate) -> UserModel:

@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.database import init_db
-from routers import todo, user
+from domain.user import user_router
+from domain.todo import todo_router
 
 app = FastAPI()
 
@@ -9,13 +10,18 @@ app = FastAPI()
 init_db()
 
 # CORS 설정
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # 라우터 등록
-app.include_router(todo.router)
-app.include_router(user.router)
+app.include_router(todo_router.router)
+app.include_router(user_router.router)

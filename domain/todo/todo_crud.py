@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
-from models.models import TodoModel
-from schemas.schemas import TodoCreate, TodoPatch, TodoUpdate
+from models import TodoModel  # 또는 from models import TodoModel as Todo
+
+# from schemas.schemas import TodoCreate, TodoPatch, TodoUpdate
+from domain.todo.todo_schema import TodoCreate, TodoPatch, TodoUpdate
 
 
 def create_todo(db: Session, todo: TodoCreate):
